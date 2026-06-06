@@ -7,11 +7,11 @@ from openai_client import generate_post
 from source_fetcher import get_news_from_sources
 from openai_client import generate_news_post
 
-from channels.channel_friends import CHANNEL as FRIENDS_CHANNEL, PROMPT as FRIENDS_PROMPT
+#from channels.channel_friends import CHANNEL as FRIENDS_CHANNEL, PROMPT as FRIENDS_PROMPT
 #from channels.channel_job_eu import CHANNEL as JOB_EU_CHANNEL, PROMPT as JOB_EU_PROMPT
 #from channels.channel_market import CHANNEL as MARKET_CHANNEL, PROMPT as MARKET_PROMPT
 from channels.channel_network import CHANNEL as NETWORK_CHANNEL, PROMPT as NETWORK_PROMPT
-from channels.channel_services import CHANNEL as SERVICES_CHANNEL, PROMPT as SERVICES_PROMPT
+#from channels.channel_services import CHANNEL as SERVICES_CHANNEL, PROMPT as SERVICES_PROMPT
 
 from channels.channel_ai import (
     CHANNEL as AI_CHANNEL,
@@ -119,11 +119,11 @@ from channels.channel_weapon import (
     #SOURCES as WORK_EU_SOURCES
 #)
 
-from channels.channel_world import (
-    CHANNEL as WORLD_CHANNEL,
-    PROMPT as WORLD_PROMPT,
-    SOURCES as WORLD_SOURCES
-)
+#from channels.channel_world import (
+    #CHANNEL as WORLD_CHANNEL,
+    #PROMPT as WORLD_PROMPT,
+    #SOURCES as WORLD_SOURCES
+#)
 
 #from channels.channel_ads import (
     #CHANNEL as ADS_CHANNEL,
@@ -155,16 +155,16 @@ async def publish_all():
         (UKRAINE_CHANNEL, UKRAINE_PROMPT, UKRAINE_SOURCES),
         (WEAPON_CHANNEL, WEAPON_PROMPT, WEAPON_SOURCES),
         #(WORK_EU_CHANNEL, WORK_EU_PROMPT, WORK_EU_SOURCES),
-        (WORLD_CHANNEL, WORLD_PROMPT, WORLD_SOURCES),
+        #(WORLD_CHANNEL, WORLD_PROMPT, WORLD_SOURCES),
         #(ADS_CHANNEL, ADS_PROMPT, ADS_SOURCES),
     ]
 
     static_channels = [
 
-        (FRIENDS_CHANNEL, FRIENDS_PROMPT),
+        #(FRIENDS_CHANNEL, FRIENDS_PROMPT),
         #(JOB_EU_CHANNEL, JOB_EU_PROMPT),
         #WORK_CHANNEL, NETWORK_PROMPT),
-        (SERVICES_CHANNEL, SERVICES_PROMPT),
+        #(SERVICES_CHANNEL, SERVICES_PROMPT),
 
     ]
 
@@ -229,13 +229,13 @@ def run_cycle():
         publish_all()
     )
 
-
-schedule.every(3).hours.do(run_cycle)
+schedule.every().day.at("09:00").do(run_cycle)
+schedule.every().day.at("14:00").do(run_cycle)
+schedule.every().day.at("19:00").do(run_cycle)
 
 print("Бот запущен")
-print("Публикация каждые 3 часа")
-
-run_cycle()
+print("Публикация 3 раза в день: 09:00, 14:00, 19:00")
+print("Ночью публикаций не будет")
 
 while True:
 
